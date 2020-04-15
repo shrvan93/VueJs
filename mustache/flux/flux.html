@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./flux.css">
+    <script src="./flux.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 v-if="good">Java Script is nice</h1>
+        <h1 v-else>Oh no</h1>
+
+
+        <div v-if="Math.random() > 0.5">
+            Sometimes you are lucky
+        </div>
+        <div v-else>
+            Sometimes you are not lucky
+        </div>
+
+
+        <div v-if="hour() < 5">Vise plecute!</div>
+        <div v-else-if="hour() < 11">Buna Dimineata</div>
+        <div v-else-if="hour() < 18">Buna ziua</div>
+        <div v-else>Buna seara</div>
+
+        <h1 v-show="good">Lorem ipsum dolor sit amet consectetur.</h1>
+
+        <ul>
+            <li v-for="(messgae, index) in todo" :id="index">
+                   {{ index + 1}} - {{ message }}
+            </li>
+        </ul>
+        <button v-on:click="AddNewItem">Add new todo</button>
+    </div>
+</body>
+</html>
