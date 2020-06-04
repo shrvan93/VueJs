@@ -1,14 +1,21 @@
 function go() {
-    showCircle(150, 150, 100, div => {
-        div.classList.add('message')
-        div.append('Hello, world!')
+    // showCircle(150, 150, 100, div => {
+    //     div.classList.add('message')
+    //     div.append('Hello, world!')
 
-    })
+    // })
+
+    showCircleWithPromise(150, 150, 100).then(
+        div => {
+            div.classList.add('message')
+            div.append('Hello, world')
+        }
+    )
 }
 
 
 //deminsiune initiale
-function showCircle(x, y, r, callback) {
+function showCircleWithPromise(x, y, r) {
     let div = document.createElement('div')
     div.style.width = 0
     div.style.height = 0
@@ -17,13 +24,14 @@ function showCircle(x, y, r, callback) {
     div.className = 'circle'
     document.body.append(div)
 
-    setTimeout( () => {
-        div.style.width = r * 2 + 'px'
-        div.style.height = r * 2 + 'px'
-        div.addEventListener('transitioned', function() {
-            div.removeEventListener('transitioned', handler)
-            callback(div)
-        })
-    },
-    0)
+    return new Promise(resolve => {
+        setTimeout( () => {
+            div.style.width = r * 2 + 'px'
+            div.style.height = r * 2 + 'px'
+            div.addEventListener('transitioned', function() {
+                div.removeEventListener('transitioned', handler)
+                resolve(div)
+            })
+        },0)
+    })
 }
